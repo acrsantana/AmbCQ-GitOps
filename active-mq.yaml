@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: active-mq
+    project: fractal
+  name: active-mq
+  namespace: fractal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: active-mq
+  template:
+    metadata:
+      labels:
+        app: active-mq
+    spec:
+      containers:
+        - name: active-mq
+          image: apache/activemq-classic:5.18.6
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              cpu: 400m
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: active-mq
+    project: fractal
+  name: active-mq
+  namespace: fractal
+spec:
+  ports:
+    - name: dashboard
+      port: 8161
+      protocol: TCP
+      targetPort: 8161
+    - name: openwire
+      port: 61616
+      protocol: TCP
+      targetPort: 61616
+    - name: amqp
+      port: 5672
+      protocol: TCP
+      targetPort: 5672
+    - name: stomp
+      port: 61613
+      protocol: TCP
+      targetPort: 61613
+    - name: mqtt
+      port: 1883
+      protocol: TCP
+      targetPort: 1883
+  selector:
+    app: active-mq
+  type: LoadBalancer
