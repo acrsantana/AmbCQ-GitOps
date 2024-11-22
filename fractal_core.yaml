@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-fractal-core
+data:
+  DATABASE_DBNAME: "fractal_api_db"
+  DATABASE_HOST: "postgres"
+  DATABASE_PASSWORD: "root"
+  DATABASE_PORT: "5432"
+  DATABASE_USER: "fractal_api"
+  FILEPATH_INPUT: "data/input"
+  FILEPATH_OUTPUT: "data/output"
+  PYTHONUNBUFFERED: "TRUE"
+  IMAGE_VERSION: "dev"
+  TZ: "America/Sao_Paulo"
+  ACTIVEMQ_BROKER-URL: "192.168.75.102"
+  ACTIVEMQ_USER: "admin"
+  ACTIVEMQ_PASSWORD: "admin"
+  ACTIVEMQ_PORT: "61613"
+  ACTIVEMQ_PROCESS-QUEUE: "fractal.start.process.queue"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fractal-core
+  labels:
+    app: fractal-core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fractal-core
+  template:
+    metadata:
+      labels:
+        app: fractal-core
+    spec:
+      containers:
+      - name: fractal-core
+        image: cezaodabahia/fractal-core:1.1.15
+        ports:
+        - containerPort: 5000
+        envFrom:
+          - configMapRef:
+              name: configmap-fractal-core
+        volumeMounts:
+          - mountPath: /fractal/data
+            name: fractal-data
+      volumes:
+        - name: fractal-data
+          persistentVolumeClaim:
+            claimName: pvc-shared-api-core
