@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-fractal-api
+data:
+  FRACTAL_CORE_SERVICE: "http://fractal-core.fractal.svc:5000"
+  FRACTAL_DB_HOST: "postgres"
+  FRACTAL_DB_URL: "jdbc:postgresql://postgres:5432/fractal_api_db"
+  FRACTAL_INPUT_FILEPATH: "/fractal/data/input/"
+  FRACTAL_MQ_CREATE_CITY: "fractal.create.city.queue"
+  FRACTAL_MQ_PROCESS_QUEUE: "fractal.start.process.queue"
+  FRACTAL_MQ_URL: "tcp://192.168.75.102:61616"
+  FRACTAL_OUTPUT_FILEPATH: "/fractal/data/output/"
+  FRACTAL_UI_HOST: "fractal-webui.fractal.svc"
+  FRACTAL_POOL_SIZE: "1"
+  FRACTAL_ETL_SERVICE: "https://airflow.cezaodabahia.com.br:443"
+  TZ: "America/Sao_Paulo"
+  FRACTAL_AIRFLOW_PASSWORD: "airflow"
+  FRACTAL_AIRFLOW_USER: "airflow"
+  FRACTAL_API_PASSWORD: "root"
+  FRACTAL_API_USERNAME: "fractal_api"
+  FRACTAL_MQ_PASSWORD: "admin"
+  FRACTAL_MQ_USERNAME: "admin"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fractal-api
+  labels:
+    app: fractal-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fractal-api
+  template:
+    metadata:
+      name: fractal-api
+      labels:
+        app: fractal-api
+    spec:
+      containers:
+        - name: fractal-api
+          image: cezaodabahia/fractal-api:1.28.1
+          imagePullPolicy: Always
+          volumeMounts:
+            - mountPath: /fractal/data
+              name: fractal-data
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: configmap-fractal-api
+          resources:
+            requests:
+              memory: "512M"
+              cpu: "50m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+      restartPolicy: Always
+      volumes:
+        - name: fractal-data
+          persistentVolumeClaim:
+            claimName: pvc-shared-api-core
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fractal-api
+spec:
+  selector:
+    app: fractal-api
+  ports:
+    - protocol: TCP
+      port: 8080
+  type: NodePort
