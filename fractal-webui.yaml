@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fractal-webui
+  labels:
+    app: fractal-webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fractal-webui
+  template:
+    metadata:
+      name: fractal-webui
+      labels:
+        app: fractal-webui
+    spec:
+      containers:
+        - name: fractal-webui
+          image: cezaodabahia/fractal-webui:1.7.0
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "256M"
+              cpu: "50m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fractal-webui
+spec:
+  selector:
+    app: fractal-webui
+  ports:
+    - protocol: TCP
+      port: 80
+  type: NodePort
+
