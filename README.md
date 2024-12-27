@@ -27,9 +27,10 @@ alias k=kubectl
 sudo snap install helm --classic && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ```
 
-### Clonar o repositório do projeto abaixo
+### Clonar os repositórios dos projetos abaixo
 ```
-cd && git clone https://github.com/cablespaghetti/k3s-monitoring.git && cd k3s-monitoring
+cd && git clone https://github.com/cablespaghetti/k3s-monitoring.git
+cd && git clone https://github.com/acrsantana/AmbCQ-GitOps.git
 ```
 
 
@@ -41,7 +42,7 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 ### Editar o arquivo kube-prometheus-stack-values.yaml inserindo informações relevantes
 Prestar especial atenção para a imagem do kube-state-metrics, caso seja necessário substituir pela registry.k8s.io/kube-state-metrics/kube-state-metrics:2.14.0
 ```
-nano kube-prometheus-stack-values.yaml
+cd && cd k3s-monitoring && nano kube-prometheus-stack-values.yaml
 ```
 
 ### Instalar Prometheus e Grafana
@@ -65,3 +66,42 @@ http://<your-k3s-node-ip>:<nodeport>
 Utilizar a seguinte credencial:
 Login: admin
 Password: prom-operator
+
+### Instalar o Docker Engine
+Desinstalar qualquer pacote conflitante, caso exista:
+```
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+```
+Configurar o repositório APT do docker
+```
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+Instalar a versão mais recente do docker
+```
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+Criar um grupo docker e adicione seu usuário
+```
+sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker
+```
+Configure o docker para sempre iniciar junto com o sistema
+```
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+```
+Verifique que o docker está instalado corretamente
+```
+docker run hello-world
+```
