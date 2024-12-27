@@ -33,7 +33,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-volume-claim
-  namespace: keycloak
+  namespace: fractal
   labels:
     app: postgres
     project: fractal
