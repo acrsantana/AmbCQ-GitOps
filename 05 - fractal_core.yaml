@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: configmap-fractal-core
+  namespace: fractal
 data:
   DATABASE_DBNAME: "fractal_api_db"
   DATABASE_HOST: "postgres"
@@ -13,7 +14,7 @@ data:
   PYTHONUNBUFFERED: "TRUE"
   IMAGE_VERSION: "dev"
   TZ: "America/Sao_Paulo"
-  ACTIVEMQ_BROKER-URL: "192.168.75.102"
+  ACTIVEMQ_BROKER-URL: "192.168.75.106"
   ACTIVEMQ_USER: "admin"
   ACTIVEMQ_PASSWORD: "admin"
   ACTIVEMQ_PORT: "61613"
@@ -23,6 +24,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fractal-core
+  namespace: fractal
   labels:
     app: fractal-core
 spec:
@@ -37,7 +39,7 @@ spec:
     spec:
       containers:
       - name: fractal-core
-        image: cezaodabahia/fractal-core:1.1.15
+        image: cezaodabahia/fractal-core:latest
         ports:
         - containerPort: 5000
         envFrom:
