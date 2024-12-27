@@ -53,7 +53,7 @@ helm upgrade --install prometheus prometheus-community/kube-prometheus-stack --v
 ### Editar o service do Grafana para usar NodePort
 Alterar o tipo de ClusterIP para NodePort
 ```
-kubectl edit service/prometheus-grafana
+k edit svc -n default prometheus-grafana
 ```
 
 ### Verificar qual porta foi alocada para o Grafana com o comando abaixo:
