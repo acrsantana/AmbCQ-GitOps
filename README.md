@@ -57,12 +57,16 @@ k edit svc -n default prometheus-grafana
 ```
 
 ### Verificar qual porta foi alocada para o Grafana com o comando abaixo:
+PORT(S)
+80:**XXXXX**/TCP
 ```
 k get service prometheus-grafana
 ```
+![image](https://github.com/user-attachments/assets/1335b592-8167-43f3-8064-c21636e0fca1)
+
 
 ### Acessar a console do Grafana
-http://<your-k3s-node-ip>:<nodeport>
+http://\<your-k3s-node-ip>:\<nodeport>  
 Utilizar a seguinte credencial:
 Login: admin
 Password: prom-operator
@@ -94,7 +98,8 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 ```
 Criar um grupo docker e adicione seu usuário
 ```
-sudo groupadd docker && sudo usermod -aG docker $USER && newgrp docker
+sudo groupadd docker
+sudo usermod -aG docker $USER && newgrp docker
 ```
 Configure o docker para sempre iniciar junto com o sistema
 ```
