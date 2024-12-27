@@ -24,6 +24,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-shared-api-core
+  namespace: fractal
 spec:
   accessModes:
     - ReadWriteMany
