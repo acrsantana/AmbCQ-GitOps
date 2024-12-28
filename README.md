@@ -2,6 +2,10 @@
 Manifests para criação do Ambiente Cezão de Qualidade
 
 ## Instalação do K3s
+### Atualizar pacotes apt
+```
+sudo apt update && sudo apt upgrade -y
+```
 ### Criar diretórios para snapshots e backups do etcd
 ```
 sudo mkdir /data && sudo mkdir /data/etcd && sudo mkdir /data/etcd/etcd-snapshots && sudo mkdir /data/etcd/etcd-backups && sudo chmod -R 777 /data
