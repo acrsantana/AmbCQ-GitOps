@@ -160,8 +160,10 @@ metadata:
 spec:
   ports:
     - name: http
-      port: 8080
       nodePort: 30080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
   selector:
     app: keycloak
   type: NodePort
