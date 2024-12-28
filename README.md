@@ -114,6 +114,12 @@ docker run hello-world
 ![image](https://github.com/user-attachments/assets/d2688461-2580-403b-af7c-cfa75b6be650)
 
 ## Deploy da suite Fractal
+### Instalar o Airflow
+O Airflow é o único componente que ainda não está rodando nativamente no kubernetes, e deve ser instalado via docker compose.
+```
+docker compose -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/docker-compose.yaml -d up
+```
+
 ### Criar a namespace do fractal
 ```
 k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/00%20-%20fractal-namespace.yaml
