@@ -40,7 +40,6 @@ sudo snap install helm --classic && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ### Clonar os repositórios dos projetos abaixo
 ```
 cd && git clone https://github.com/cablespaghetti/k3s-monitoring.git
-cd && git clone https://github.com/acrsantana/AmbCQ-GitOps.git
 ```
 
 ### Adicionar o repositório do Helm Chart do Prometheus
