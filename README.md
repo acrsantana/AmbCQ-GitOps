@@ -123,10 +123,28 @@ docker run hello-world
 
 ## Deploy da suite Fractal
 ### Instalar o Airflow
-O Airflow é o único componente que ainda não está rodando nativamente no kubernetes, e deve ser instalado via docker compose.
+Os seguintes diretórios devem ser criados, e terem as devidas permissões atribuidas:  
+**./dags** - As dags devem ser armazenadas neste diretório.  
+**./logs** - contém os logs de execução das task e scheduler.  
+**./config** - you can add custom log parser or add airflow_local_settings.py to configure cluster policy.  
+**./plugins** - Plugins customizados devem ser armazenados neste diretório.  
+
 ```
 cd && mkdir airflow && cd airflow
+mkdir -p ./dags ./logs ./plugins ./config
+echo -e "AIRFLOW_UID=$(id -u)" > .env
+```
+
+O Airflow é o único componente que ainda não está rodando nativamente no kubernetes, e deve ser instalado via docker compose.
+```
+cd && cd airflow
 sudo curl -O https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/docker-compose.yaml
+docker compose up airflow-init
+```
+
+Após instalar e configurar, o airflow pode ser executado
+```
+cd && cd airflow
 docker compose up -d
 ```
 
