@@ -41,7 +41,10 @@ spec:
   selector:
     app: fractal-webui
   ports:
-    - protocol: TCP
+    - name: http
+      nodePort: 31000
       port: 80
+      protocol: TCP
+      targetPort: 80
   type: NodePort
 
