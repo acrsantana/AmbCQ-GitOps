@@ -116,40 +116,40 @@ docker run hello-world
 ## Deploy da suite Fractal
 ### Criar a namespace do fractal
 ```
-k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/00%20-%20fractal-namespace.yaml?token=GHSAT0AAAAAAC2CLDYF2OFQVXHMGQE7NKJGZ3PCG6A
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/00%20-%20fractal-namespace.yaml
 ```
 
 ### Instalar o Active MQ
 ```
-k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/01%20-%20active-mq.yaml?token=GHSAT0AAAAAAC2CLDYEOKX746TS4UX3WJMGZ3PCI3A
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/01%20-%20active-mq.yaml
 ```
 
 ### Instalar o Keycloak
 ```
-k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/02%20-%20keycloak.yaml?token=GHSAT0AAAAAAC2CLDYE2CRPEULRPCSYKUAKZ3PCQZA
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/02%20-%20keycloak.yaml
 ```
 
 ### Instalar o Postgres (Postgis)
 ```
-k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/03%20-%20fractal-postgres.yaml?token=GHSAT0AAAAAAC2CLDYF4C2CMUCPXRAXZASCZ3QBEYQ
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/03%20-%20fractal-postgres.yaml
 ```
 
 ### Criação do volume compartilhado (core e api)
 ```
-k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/04%20-%20fractal-shared-volumes.yaml?token=GHSAT0AAAAAAC2CLDYEMYRKO5YINSYLOL4OZ3PCZDQ
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/04%20-%20fractal-shared-volumes.yaml
 ```
 
 ### Deploy do fractal-core (latest)
 ```
-k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/05%20-%20fractal_core.yaml?token=GHSAT0AAAAAAC2CLDYF7RTA3WOY3YFB2Z2SZ3PDGXQ
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/05%20-%20fractal_core.yaml
 ```
 
 ### Deploy do fractal-api (latest)
 ```
-k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/06%20-%20fractal-api.yaml?token=GHSAT0AAAAAAC2CLDYERJIHVOVA33L2BPJOZ3PDTNQ
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/06%20-%20fractal-api.yaml
 ```
 
 ### Deploy do fractal-webui (latest)
 ```
-k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/07%20-%20fractal-webui.yaml?token=GHSAT0AAAAAAC2CLDYF5DNYFZB6XIOVENSCZ3QA6EA
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/07%20-%20fractal-webui.yaml
 ```
