@@ -40,6 +40,7 @@ sudo snap install helm --classic && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ### Clonar os repositórios dos projetos abaixo
 ```
 cd && git clone https://github.com/cablespaghetti/k3s-monitoring.git
+cd && git clone https://github.com/acrsantana/AmbCQ-GitOps.git
 ```
 
 ### Adicionar o repositório do Helm Chart do Prometheus
@@ -131,7 +132,8 @@ Os seguintes diretórios devem ser criados, e terem as devidas permissões atrib
 
 ```
 cd && mkdir airflow && cd airflow
-mkdir -p ./dags ./logs ./plugins ./config
+mkdir -p ./logs ./plugins ./config
+cp -r ../AmbCQ-GitOps/dags .
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```
 
