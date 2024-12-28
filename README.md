@@ -26,6 +26,11 @@ Inserir a seguinte linha:
 alias k=kubectl
 ```
 
+### Reinicializar o servidor
+```
+sudo shutdown -r now
+```
+
 ## Instalar o Helm
 ```
 sudo snap install helm --classic && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
