@@ -22,17 +22,17 @@ Inserir a seguinte linha:
 alias k=kubectl
 ```
 
-### Instalar o Helm
+## Instalar o Helm
 ```
 sudo snap install helm --classic && export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ```
 
+## Instalar o Prometheus e Grafana
 ### Clonar os repositórios dos projetos abaixo
 ```
 cd && git clone https://github.com/cablespaghetti/k3s-monitoring.git
 cd && git clone https://github.com/acrsantana/AmbCQ-GitOps.git
 ```
-
 
 ### Adicionar o repositório do Helm Chart do Prometheus
 ```
@@ -44,6 +44,7 @@ Prestar especial atenção para a imagem do kube-state-metrics, caso seja necess
 ```
 cd && cd k3s-monitoring && nano kube-prometheus-stack-values.yaml
 ```
+![image](https://github.com/user-attachments/assets/0b385c16-2e57-438f-8749-abc4341d7d6b)
 
 ### Instalar Prometheus e Grafana
 ```
@@ -55,6 +56,7 @@ Alterar o tipo (type) de ClusterIP para NodePort
 ```
 k edit svc -n default prometheus-grafana
 ```
+![image](https://github.com/user-attachments/assets/8ccc3b60-970d-40b9-bb3c-58094f707f6b)
 
 ### Verificar qual porta foi alocada para o Grafana com o comando abaixo:
 PORT(S)
@@ -64,19 +66,18 @@ k get service prometheus-grafana
 ```
 ![image](https://github.com/user-attachments/assets/1335b592-8167-43f3-8064-c21636e0fca1)
 
-
 ### Acessar a console do Grafana
 http://\<your-k3s-node-ip>:\<nodeport>  
 Utilizar a seguinte credencial:
 Login: admin
 Password: prom-operator
 
-### Instalar o Docker Engine
-Desinstalar qualquer pacote conflitante, caso exista:
+## Instalar o Docker Engine
+### Desinstalar qualquer pacote conflitante, caso exista:
 ```
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
-Configurar o repositório APT do docker
+### Configurar o repositório APT do docker
 ```
 # Add Docker's official GPG key:
 sudo apt-get update
@@ -92,21 +93,63 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 ```
-Instalar a versão mais recente do docker
+### Instalar a versão mais recente do docker
 ```
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
-Criar um grupo docker e adicione seu usuário
+### Criar um grupo docker e adicione seu usuário
 ```
 sudo groupadd docker
 sudo usermod -aG docker $USER && newgrp docker
 ```
-Configure o docker para sempre iniciar junto com o sistema
+### Configure o docker para sempre iniciar junto com o sistema
 ```
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 ```
-Verifique que o docker está instalado corretamente
+### Verifique que o docker está instalado corretamente
 ```
 docker run hello-world
+```
+![image](https://github.com/user-attachments/assets/d2688461-2580-403b-af7c-cfa75b6be650)
+
+## Deploy da suite Fractal
+### Criar a namespace do fractal
+```
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/00%20-%20fractal-namespace.yaml?token=GHSAT0AAAAAAC2CLDYF2OFQVXHMGQE7NKJGZ3PCG6A
+```
+
+### Instalar o Active MQ
+```
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/01%20-%20active-mq.yaml?token=GHSAT0AAAAAAC2CLDYEOKX746TS4UX3WJMGZ3PCI3A
+```
+
+### Instalar o Keycloak
+```
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/02%20-%20keycloak.yaml?token=GHSAT0AAAAAAC2CLDYE2CRPEULRPCSYKUAKZ3PCQZA
+```
+
+### Instalar o Postgres (Postgis)
+```
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/03%20-%20fractal-postgres.yaml?token=GHSAT0AAAAAAC2CLDYF4C2CMUCPXRAXZASCZ3QBEYQ
+```
+
+### Criação do volume compartilhado (core e api)
+```
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/04%20-%20fractal-shared-volumes.yaml?token=GHSAT0AAAAAAC2CLDYEMYRKO5YINSYLOL4OZ3PCZDQ
+```
+
+### Deploy do fractal-core (latest)
+```
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/05%20-%20fractal_core.yaml?token=GHSAT0AAAAAAC2CLDYF7RTA3WOY3YFB2Z2SZ3PDGXQ
+```
+
+### Deploy do fractal-api (latest)
+```
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/06%20-%20fractal-api.yaml?token=GHSAT0AAAAAAC2CLDYERJIHVOVA33L2BPJOZ3PDTNQ
+```
+
+### Deploy do fractal-webui (latest)
+```
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/07%20-%20fractal-webui.yaml?token=GHSAT0AAAAAAC2CLDYF5DNYFZB6XIOVENSCZ3QA6EA
 ```
