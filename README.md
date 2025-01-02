@@ -1,5 +1,5 @@
 # AmbCQ-GitOps
-Manifests para criação do Ambiente Cezão de Qualidade
+Segue abaixo procedimento detalhado para a montagem do ambiente do projeto Fractal. Todo o ambiente foi montado considerando o Ubuntu 22.04 como sistema operacional de base, portanto os comandos são baseados neste ambiente. Os mesmos comandos também foram testados na versão 24.04 e funcionam perfeitamente.
 
 ## Instalação do K3s
 ### Atualizar pacotes apt
