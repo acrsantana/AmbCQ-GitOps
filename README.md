@@ -187,6 +187,10 @@ k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/
 ```
 k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/06%20-%20fractal-api.yaml
 ```
+Editar o configmap, alterando a variável **FRACTAL_ETL_SERVICE** para refletir o IP do airflow na API
+```
+k edit cm -n fractal configmap-fractal-api
+```
 Validar que o deploy ocorreu com sucesso acessando a documentação da API no link: http://\<ip-servidor>:31080/swagger-ui/index.html
 ![image](https://github.com/user-attachments/assets/9484fc5d-09cd-425c-a888-5c7fb11e4647)
 
