@@ -40,6 +40,13 @@ spec:
       containers:
       - name: fractal-core
         image: cezaodabahia/fractal-core:latest
+        resources:
+            requests:
+              memory: "512M"
+              cpu: "100m"
+            limits:
+              memory: "3400Mi"
+              cpu: "1200m"
         ports:
         - containerPort: 5000
         envFrom:
