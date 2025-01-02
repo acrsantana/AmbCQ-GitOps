@@ -134,6 +134,7 @@ Os seguintes diretórios devem ser criados, e terem as devidas permissões atrib
 cd && mkdir airflow && cd airflow
 mkdir -p ./logs ./plugins ./config
 cp -r ../AmbCQ-GitOps/dags .
+cp ../AmbCQ-GitOps/connections.json ./config
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```
 
