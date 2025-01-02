@@ -24,7 +24,7 @@
     "description": "",
     "login": "fractal_api",
     "password": "root",
-    "host": "db",
+    "host": "192.168.75.108",
     "port": 5432,
     "schema": "fractal_api_db",
     "extra": ""
