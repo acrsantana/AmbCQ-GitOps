@@ -192,13 +192,15 @@ Editar o configmap, alterando a variável **FRACTAL_ETL_SERVICE** para refletir 
 ```
 k edit cm -n fractal configmap-fractal-api
 ```
+![image](https://github.com/user-attachments/assets/ca9b90a6-8912-4c36-8b85-5d64998051bf)
+
 Verificar o nome do pod do fractal core, para que o mesmo possa ser reiniciado após mudança do configmap
 ```
 k get pod -n fractal
 ```
 ![image](https://github.com/user-attachments/assets/bdba994b-11ea-4a60-a873-4fe5576003a2)
 
-Restartar o pod do fractak-api para refletir as mudanças no configmap
+Restartar o pod do fractal-api para refletir as mudanças no configmap
 ```
 k get pod <pod_name> -n fractal -o yaml | kubectl replace --force -f -
 ```
@@ -206,11 +208,29 @@ Validar que o deploy ocorreu com sucesso acessando a documentação da API no li
 ![image](https://github.com/user-attachments/assets/9484fc5d-09cd-425c-a888-5c7fb11e4647)
 
 ### Deploy do fractal-webui (latest)
+É necessário configurar o projeto frontend e o keycloak para que o redirect uri seja apontado para o endereço do deploy da aplicação http://\<ip-servidor>:31000, conforme imagens abaixo:
+
+**Keycloak**  
+![image](https://github.com/user-attachments/assets/458c0b7c-9845-4943-ad0c-5809a1389c13)
+![image](https://github.com/user-attachments/assets/12b720e4-1662-4848-ba10-82c1041c182b)
+
+**Frontend (fractal-webui)**
+![image](https://github.com/user-attachments/assets/c46b8190-7c94-4e4a-8b7b-616715a03af2)
+![image](https://github.com/user-attachments/assets/7f4460cd-331b-487d-aa3c-d2d14202fcdc)
+
+Por característica, o projeto do frontend precisa que as configurações sejam feitas hardcoded, o que exige que a imagem docker seja reconstruída após mudanças no projeto.
+```
+npm run build
+docker image build -t cezaodabahia/fractal-webui:latest .
+```
+
+Realizar o deploy da aplicação
 ```
 k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/07%20-%20fractal-webui.yaml
 ```
 Validar que o deploy ocorreu com sucesso acessando o frontend no link: http://\<ip-servidor>:31000  
-**Observação:** O frontend utiliza o keycloak Minsait, instalado no ambiente de Desenvolvimento. Para que a tela de autenticação apareça, é necessário ter conectividade com o ambiente Dev Minsait, seja diretamente ou através de VPN.
+**Observação:** O frontend utiliza o keycloak Minsait, instalado no ambiente de Desenvolvimento. Para que a tela de autenticação apareça, é necessário ter conectividade com o ambiente Dev Minsait, seja diretamente ou através de VPN.  
+
 
 ### Instalar o Keycloak (opcional)
 ```
