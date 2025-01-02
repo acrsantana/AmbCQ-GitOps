@@ -192,6 +192,16 @@ Editar o configmap, alterando a variável **FRACTAL_ETL_SERVICE** para refletir 
 ```
 k edit cm -n fractal configmap-fractal-api
 ```
+Verificar o nome do pod do fractal core, para que o mesmo possa ser reiniciado após mudança do configmap
+```
+k get pod -n fractal
+```
+![image](https://github.com/user-attachments/assets/bdba994b-11ea-4a60-a873-4fe5576003a2)
+
+Restartar o pod do fractak-api para refletir as mudanças no configmap
+```
+k get pod <pod_name> -n fractal -o yaml | kubectl replace --force -f -
+```
 Validar que o deploy ocorreu com sucesso acessando a documentação da API no link: http://\<ip-servidor>:31080/swagger-ui/index.html
 ![image](https://github.com/user-attachments/assets/9484fc5d-09cd-425c-a888-5c7fb11e4647)
 
