@@ -1,0 +1,32 @@
+{
+  "diana_raw_outside_plant": {
+    "conn_type": "mysql",
+    "description": "",
+    "login": "USR_FRACTAL_DEV",
+    "password": "F5#BC7YH",
+    "host": "10.215.44.25",
+    "port": 32439,
+    "schema": "raw_outside_plant",
+    "extra": ""
+  },
+  "diana_trino": {
+    "conn_type": "trino",
+    "description": "",
+    "login": "USR_FRACTAL_DEV",
+    "password": "F5#BC7YH",
+    "host": "trino-route-telco-datastorage-prod.apps.ocp-01.tdigital-vivo.com.br",
+    "port": 443,
+    "schema": "hive",
+    "extra": ""
+  },
+  "fractal_db": {
+    "conn_type": "postgres",
+    "description": "",
+    "login": "fractal_api",
+    "password": "root",
+    "host": "db",
+    "port": 5432,
+    "schema": "fractal_api_db",
+    "extra": ""
+  }
+}
