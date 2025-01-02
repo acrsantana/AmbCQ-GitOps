@@ -42,6 +42,7 @@ spec:
       port: 8161
       protocol: TCP
       targetPort: 8161
+      nodePort: 30161
     - name: openwire
       port: 61616
       protocol: TCP
