@@ -166,7 +166,7 @@ k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/
 ```
 k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/01%20-%20active-mq.yaml
 ```
-Validar que o Active MQ encontra-se acessivel em http://\<ip-servidor>:8161. A conta padrão tem o login **admin** e a senha **admin**.
+Validar que o Active MQ encontra-se acessivel em http://\<ip-servidor>:30161. A conta padrão tem o login **admin** e a senha **admin**.
 ![image](https://github.com/user-attachments/assets/7048048b-416c-4fbe-bcc8-f6b62a0f74ff)
 
 ### Instalar o Postgres (Postgis)
