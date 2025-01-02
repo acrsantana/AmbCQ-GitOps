@@ -218,7 +218,7 @@ Validar que o deploy ocorreu com sucesso acessando a documentação da API no li
 ![image](https://github.com/user-attachments/assets/c46b8190-7c94-4e4a-8b7b-616715a03af2)
 ![image](https://github.com/user-attachments/assets/7f4460cd-331b-487d-aa3c-d2d14202fcdc)
 
-Por característica, o projeto do frontend precisa que as configurações sejam feitas hardcoded, o que exige que a imagem docker seja reconstruída após mudanças no projeto.
+Por característica, o projeto do frontend precisa que as configurações sejam feitas hardcoded, o que exige que a imagem docker seja reconstruída após mudanças no projeto. Caso seja necessário, clone o repositório do projeto no servidor, realize as mudanças informadas acima e reconstrua a imagem de forma que a mesma fique armazenada de forma local, ou altere o arquivo 07 - fractal-webui.yaml para buscar a imagem nova em um outro image registry (não será possível modificar a imagem cezaodabahia/fractal-webui:latest sem autenticar com o usuário cezaodabahia no docker hub).
 ```
 npm run build
 docker image build -t cezaodabahia/fractal-webui:latest .
@@ -228,6 +228,16 @@ Realizar o deploy da aplicação
 ```
 k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/07%20-%20fractal-webui.yaml
 ```
+
+Ou caso tenha optado por modificar o arquivo de deployment, executar o comando abaixo
+
+**Arquivo Deployment**
+![image](https://github.com/user-attachments/assets/828d9595-11fe-4d5f-83c6-4fea24c36885)
+
+```
+k apply -f <caminho-do-arquivo-modificado.yaml>
+```
+
 Validar que o deploy ocorreu com sucesso acessando o frontend no link: http://\<ip-servidor>:31000  
 **Observação:** O frontend utiliza o keycloak Minsait, instalado no ambiente de Desenvolvimento. Para que a tela de autenticação apareça, é necessário ter conectividade com o ambiente Dev Minsait, seja diretamente ou através de VPN.  
 
