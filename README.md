@@ -155,7 +155,9 @@ cd
 Acesse a interface web do airflow para validar a instalação. O servidor web está disponível em http://\<ip-servidor>:8085. A conta padrão tem o login **airflow** e a senha **airflow**.
 ![image](https://github.com/user-attachments/assets/db2105d8-a65d-421b-82bb-848bd25900db)
 
-Durante o processo de instalação, algumas dags do projeto Fractal já foram copiadas para a pasta correspondente. É necessário verificar se as mesmas estão atualizadas na versão correta.
+Durante o processo de instalação, algumas dags do projeto Fractal já foram copiadas para a pasta correspondente. É necessário verificar se as mesmas estão atualizadas na versão correta. Após acessar o airflow, habilitar todas as dags e executar a dag **Import Airflow Connections**
+![image](https://github.com/user-attachments/assets/209b8bf1-7574-4ee5-80c5-7e03eac38672)
+
 
 ### Criar a namespace do fractal
 ```
@@ -174,6 +176,14 @@ Validar que o Active MQ encontra-se acessivel em http://\<ip-servidor>:30161. A 
 k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/03%20-%20fractal-postgres.yaml
 ```
 
+### Configurar a connection fractal_db do Airflow e executar as DAGs
+No airflow, clicar em Admin / Connections conforme imagem abaixo, e depois clicar no ícone de editar
+![image](https://github.com/user-attachments/assets/da84012b-7a58-4cf4-ba7c-484069d148bc)
+![image](https://github.com/user-attachments/assets/adb99e19-6edd-4c3e-89ee-9809b4d5187c)
+Ajustar o campo Host com o IP do node, e preencher novamente o campo Password com o valor root
+![image](https://github.com/user-attachments/assets/0ded73d2-c5ff-4f0d-806e-d6c543d1a03b)
+Voltar para a aba DAGs e executar as dags ETL TLF_Brasil e City Data Transfer
+
 ### Criação do volume compartilhado (core e api)
 ```
 k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/04%20-%20fractal-shared-volumes.yaml
@@ -188,13 +198,14 @@ k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/
 ```
 k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/06%20-%20fractal-api.yaml
 ```
-Editar o configmap, alterando a variável **FRACTAL_ETL_SERVICE** para refletir o IP do airflow na API
+Editar o configmap, alterando a variável **FRACTAL_ETL_SERVICE** para refletir o IP do airflow na API  
+http://\<ip-servidor>:8085
 ```
 k edit cm -n fractal configmap-fractal-api
 ```
-![image](https://github.com/user-attachments/assets/ca9b90a6-8912-4c36-8b85-5d64998051bf)
+![image](https://github.com/user-attachments/assets/e89b0a37-960e-4fa7-a5cc-c4abe50a9841)
 
-Verificar o nome do pod do fractal core, para que o mesmo possa ser reiniciado após mudança do configmap
+Verificar o nome do pod do fractal api, para que o mesmo possa ser reiniciado após mudança do configmap
 ```
 k get pod -n fractal
 ```
