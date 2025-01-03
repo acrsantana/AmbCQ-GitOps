@@ -216,7 +216,7 @@ Validar que o deploy ocorreu com sucesso acessando a documentação da API no li
 
 **Frontend (fractal-webui)**
 ![image](https://github.com/user-attachments/assets/c46b8190-7c94-4e4a-8b7b-616715a03af2)
-![image](https://github.com/user-attachments/assets/7f4460cd-331b-487d-aa3c-d2d14202fcdc)
+![image](https://github.com/user-attachments/assets/d22ca6e7-959e-4f29-a301-357abf0045f3)
 
 Por característica, o projeto do frontend precisa que as configurações sejam feitas hardcoded, o que exige que a imagem docker seja reconstruída após mudanças no projeto. Caso seja necessário, clone o repositório do projeto no servidor, realize as mudanças informadas acima e reconstrua a imagem de forma que a mesma fique armazenada de forma local, ou altere o arquivo 07 - fractal-webui.yaml para buscar a imagem nova em um outro image registry (não será possível modificar a imagem cezaodabahia/fractal-webui:latest sem autenticar com o usuário cezaodabahia no docker hub).
 ```
