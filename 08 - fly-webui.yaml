@@ -42,7 +42,7 @@ spec:
     app: fly-webui
   ports:
     - name: http
-      nodePort: 31000
+      nodePort: 32000
       port: 80
       protocol: TCP
       targetPort: 80
