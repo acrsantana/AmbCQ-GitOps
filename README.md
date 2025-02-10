@@ -238,6 +238,7 @@ docker image build -t cezaodabahia/fractal-webui:latest .
 Realizar o deploy da aplicação
 ```
 k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/07%20-%20fractal-webui.yaml
+k apply -f https://raw.githubusercontent.com/acrsantana/AmbCQ-GitOps/refs/heads/main/08%20-%20fly-webui.yaml
 ```
 
 Ou caso tenha optado por modificar o arquivo de deployment, executar o comando abaixo
