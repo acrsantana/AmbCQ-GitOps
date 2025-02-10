@@ -4,21 +4,21 @@ metadata:
   name: fractal-webui
   namespace: fractal
   labels:
-    app: fractal-webui
+    app: fractal-mfe
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fractal-webui
+      app: fractal-mfe
   template:
     metadata:
-      name: fractal-webui
+      name: fractal-mfe
       labels:
-        app: fractal-webui
+        app: fractal-mfe
     spec:
       containers:
-        - name: fractal-webui
-          image: cezaodabahia/fractal-webui:latest
+        - name: fractal-mfe
+          image: cezaodabahia/fractal-mfe:latest
           imagePullPolicy: Always
           resources:
             requests:
@@ -35,11 +35,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: fractal-webui
+  name: fractal-mfe
   namespace: fractal
 spec:
   selector:
-    app: fractal-webui
+    app: fractal-mfe
   ports:
     - name: http
       nodePort: 31000
