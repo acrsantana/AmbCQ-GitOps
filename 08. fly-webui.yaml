@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fly-webui
+  namespace: fractal
+  labels:
+    app: fly-webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fly-webui
+  template:
+    metadata:
+      name: fly-webui
+      labels:
+        app: fly-webui
+    spec:
+      containers:
+        - name: fly-webui
+          image: cezaodabahia/fly:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "256M"
+              cpu: "50m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fly-webui
+  namespace: fractal
+spec:
+  selector:
+    app: fly-webui
+  ports:
+    - name: http
+      nodePort: 31000
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  type: NodePort
