@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: fractal-mfe
-          image: cezaodabahia/fractal-mfe:latest
+          image: registry.cezaodabahia.com.br/fractal-webui:3.9.6.5
           imagePullPolicy: Always
           resources:
             requests:
