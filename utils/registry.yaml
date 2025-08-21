@@ -1,0 +1,7 @@
+registry:
+  restart: always
+  image: registry:3
+  ports:
+    - 5010:5000
+  volumes:
+    - /data/registry:/var/lib/registry
