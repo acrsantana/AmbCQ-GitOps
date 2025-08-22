@@ -14,7 +14,7 @@ data:
   FRACTAL_OUTPUT_FILEPATH: "/fractal/data/output/"
   FRACTAL_UI_HOST: "fractal-webui.fractal.svc"
   FRACTAL_POOL_SIZE: "1"
-  FRACTAL_ETL_SERVICE: "http://192.168.75.108:8085"
+  FRACTAL_ETL_SERVICE: "http://192.168.15.128:8085"
   TZ: "America/Sao_Paulo"
   FRACTAL_AIRFLOW_PASSWORD: "airflow"
   FRACTAL_AIRFLOW_USER: "airflow"
