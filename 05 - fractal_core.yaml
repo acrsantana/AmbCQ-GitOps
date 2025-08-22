@@ -19,6 +19,7 @@ data:
   ACTIVEMQ_PASSWORD: "admin"
   ACTIVEMQ_PORT: "61613"
   ACTIVEMQ_PROCESS-QUEUE: "fractal.start.process.queue"
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -39,7 +40,7 @@ spec:
     spec:
       containers:
       - name: fractal-core
-        image: cezaodabahia/fractal-core:latest
+        image: images.cezaodabahia.com.br/fractal-core:3.8.6.14
         resources:
             requests:
               memory: "512M"
