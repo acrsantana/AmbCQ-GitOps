@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: fractal-mfe
-          image: images.cezaodabahia.com.br/fractal-webui:3.9.9.0
+          image: images.cezaodabahia.com.br/fly-webui:3.9.0.1
           imagePullPolicy: Always
           resources:
             requests:
