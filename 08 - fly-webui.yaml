@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: fly-webui
-          image: images.cezaodabahia.com.br/fly-webui:3.9.0.0
+          image: images.cezaodabahia.com.br/fly-webui:3.9.0.1
           imagePullPolicy: Always
           resources:
             requests:
