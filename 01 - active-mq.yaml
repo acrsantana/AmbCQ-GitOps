@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: active-mq
-          image: images.cezaodabahia.com.br/activemq-classic:5.18.6
+          image: apache/activemq-classic:5.18.6
           imagePullPolicy: IfNotPresent
           resources:
             limits:
