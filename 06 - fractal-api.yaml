@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
         - name: fractal-api
-          image: images.cezaodabahia.com.br/fractal-api:3.9.6.0
+          image: images.cezaodabahia.com.br/fractal-api:3.9.7.0
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: /fractal/data
