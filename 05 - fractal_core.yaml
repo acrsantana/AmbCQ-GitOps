@@ -43,11 +43,11 @@ spec:
         image: localhost:5000/fractal-core:3.9.0.0
         resources:
             requests:
-              memory: "512M"
+              memory: "600M"
               cpu: "100m"
             limits:
-              memory: "3400Mi"
-              cpu: "1200m"
+              memory: "3500Mi"
+              cpu: "2"
         ports:
         - containerPort: 5000
         envFrom:
