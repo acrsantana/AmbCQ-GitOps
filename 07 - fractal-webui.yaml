@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: fractal-mfe
-          image: images.cezaodabahia.com.br/fractal-mfe:3.9.7.0
+          image: localhost:5000/fractal-mfe:3.9.7.0
           imagePullPolicy: Always
           resources:
             requests:
