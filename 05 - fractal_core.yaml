@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
       - name: fractal-core
-        image: images:5000/fractal-core:3.9.0.0
+        image: localhost:5000/fractal-core:3.9.0.0
         resources:
             requests:
               memory: "600M"
