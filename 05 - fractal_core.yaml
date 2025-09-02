@@ -19,6 +19,10 @@ data:
   ACTIVEMQ_PASSWORD: "admin"
   ACTIVEMQ_PORT: "61613"
   ACTIVEMQ_PROCESS-QUEUE: "fractal.start.process.queue"
+  OSRM_URL: "http://192.168.129.129:5001"
+  OSRM_SERVICE: "route"
+  OSRM_VERSION: "v1"
+  OSRM_PROFILE: "fiber"
 
 ---
 apiVersion: apps/v1
