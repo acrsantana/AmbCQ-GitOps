@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
         - name: fractal-api
-          image: localhost:5000/fractal-api:3.9.8.1
+          image: localhost:5000/fractal-api:3.9.8.2
           imagePullPolicy: Always
           volumeMounts:
             - mountPath: /fractal/data
