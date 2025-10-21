@@ -32,7 +32,7 @@ metadata:
   labels:
     app: fractal-core
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: fractal-core
